@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- End Portfolio Section -->
+<div class="container-newsletter" style="height: 85vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-un">Sign Up</h3>
+                <div class="title-un-icon"><i class="fa ion-ios-book-outline"></i></div>
+                <p class="title-un-des">Register yourself to have further access. </p>
+                <div class="newsletter-container wow fadeInUp">
+                    <input placeholder="Username" class="newsletter-field" type="text" id="Username" required="" name="Username"> <br>
+                    <input placeholder="Password" class="newsletter-field" type="password" id="Password" required="" name="Password"  data-wow-delay=".4s"> <br>
+                    <input placeholder="Confirm Password" class="newsletter-field" type="password" id="Confirm_Password" required="" name="Confirm_Password"  data-wow-delay=".8s"> <br>
+                    <button type="submit" class="button green-button" id="submit">Sign Up</button><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+        $(function () {
+            $("#submit").click(function () {
+                debugger;
+                var uld = new Object();
+                var loginuser = new Object();
+                loginuser.userName = $('#Username').val();
+                loginuser.password = $('#Password').val();
+                loginuser.Confirm_Password = $('#Confirm_Password').val();
+                if (loginuser.userName != "" && loginuser.password != "" && loginuser.Confirm_Password != "") {
+                    if (loginuser.password != loginuser.Confirm_Password) {
+                    alert("Password and Confirm Password are not same, Please verify and try again");
+                    }
+                    else {
+                        var postData = {
+                        uld: loginuser
+                        };
+                        if (loginuser != null) {
+                            $.ajax({
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                async: false,
+                                type: "POST",
+                                url: "/Login/Register",
+                                data: JSON.stringify(postData),
+                                success: function (response) {
+                                    if (response.IsSuccess) {
+                                        //var ProposedURL = response.Data;
+                                        alert(response.Message);
+                                    } else {
+                                        alert(response.Message);
+                                    }
+                                },
+                                failure: function (response) {
+                                    debugger;
+                                    alert("Internal Error Please Try Later");
+                                },
+                                error: function (response) {
+                                    debugger;
+                                    alert("Internal Error Please Try Later");
+                                }
+                            });
+                        }
+                    }
+                }
+                else {
+                    alert("Please fill all the required details!")
+                }
+            });
+        });
+
+</script>

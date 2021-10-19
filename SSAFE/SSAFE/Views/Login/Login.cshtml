@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- End Portfolio Section -->
+<div class="container-newsletter" style="height: 85vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-un">LOGIN</h3>
+                <div class="title-un-icon"><i class="fa ion-ios-book-outline"></i></div>
+                <p class="title-un-des">Authenticate yourself to have further access. </p>
+                <div class="newsletter-container wow fadeInUp">                    
+                    <input placeholder="Username" class="newsletter-field" type="text" id="Username" required="" name="Username"> <br>
+                    <input placeholder="Password" class="newsletter-field" type="password" id="Password" required="" name="Password"> <br>
+                    <button type="submit" class="button green-button" id="submit">Validate</button><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+      
+        $(function () {
+            $("#submit").click(function () {
+                debugger;
+                var uld = new Object();
+                var loginuser = new Object();
+                loginuser.userName = $('#Username').val();
+                loginuser.password = $('#Password').val();
+                var postData = {
+                    uld: loginuser
+                };
+                if (loginuser.userName != "" && loginuser.password != "") {
+                    if (loginuser != null) {
+                        $.ajax({
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            type: "POST",
+                            url: "/Login/Login",
+                            data: JSON.stringify(postData),
+                            success: function (response) {
+                                if (response.IsSuccess) {
+                                    //var ProposedURL = response.Data;
+                                    window.location.href = "" + response.Url + "";
+                                } else {
+                                    alert(response.Message);
+                                }
+                            },
+                            failure: function (response) {
+                                debugger;
+                                alert(response.Message);
+                            },
+                            error: function (response) {
+                                debugger;
+                                alert(response.Message);
+                            }
+                        });
+                    }                    
+                }
+                else {
+                        alert("Please type username or password");
+                 }
+            });
+        });
+
+    </script>

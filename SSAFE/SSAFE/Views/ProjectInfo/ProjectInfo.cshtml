@@ -1,0 +1,82 @@
+﻿@model SSAFE.Models.ViewModel.Projects
+@{
+    ViewBag.Title = "ProjectInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-our-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title-un">Create New Checklist</h2>
+                <div class="title-un-icon"><i class="fa ion-ios-paperplane-outline"></i></div>
+                <p class="title-un-des">Start creating a new checklist by supplying project name and a brief description about its objectives.</p>
+            </div>
+        </div>
+        <div class=" align-center">
+            <label class="container"> Project Name</label>
+            <div class="newsletter-container wow fadeInUp">
+                @Html.TextBoxFor(m => m.Project_Name, new { @class = "newsletter-field", @placeholder = "Project Name", @id = "ProjectName" }) <br /><br />
+            </div>
+
+            <label class="container"> Project Description</label>
+            <div class="newsletter-container wow fadeInUp">
+                @Html.TextAreaFor(m => m.Project_Description, new { @class = "newsletter-field", @placeholder = "Project Description", @id = "ProjectDescription", @style = "margin: 0px; width: 279px; height: 125px;" }) <br /><br />
+            </div>
+            <br /><br />
+
+            <button class="button green-button" id="submit">Next</button><br>
+            @*<p class="button">
+                @Html.ActionLink("Next", "Phases", "Phases")
+            </p>*@
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+    $(function () {
+        $("#submit").click(function () {
+            debugger;
+            var pid = new Object();
+            var proinfo = new Object();
+            proinfo.Project_Name = $('#ProjectName').val();
+            proinfo.Project_Description = $('#ProjectDescription').val();
+            var postData = {
+                pid: proinfo
+            };
+            if (proinfo.Project_Name != "") {
+                if (pid != null) {
+                    $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        type: "POST",
+                        url: "/ProjectInfo/ProjectInfo",
+                        data: JSON.stringify(postData),
+                        success: function (response) {
+                            if (response.IsSuccess) {
+                                alert(response.Message);
+                                window.location.href = "" + response.Url + "";
+                            } else {
+                                alert(response.Message);
+                            }
+                        },
+                        failure: function (response) {
+                            debugger;
+                            alert(response.Message);
+                        },
+                        error: function (response) {
+                            debugger;
+                            alert(response.Message);
+                        }
+                    });
+                }
+            }
+            else {
+                alert("Please enter project name");
+            }
+        });
+    });
+
+</script>

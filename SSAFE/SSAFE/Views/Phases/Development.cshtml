@@ -1,0 +1,139 @@
+﻿@model SSAFE.Models.Entity.Development
+@{
+    ViewBag.Title = "Development";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    checkboxClass {
+    }
+
+    selectall {
+    }
+</style>
+<div class="container-our-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title-un">Development Phase</h2>
+                <div class="title-un-icon"><i class="fa ion-ios-paperplane-outline"></i></div>
+                <p class="title-un-des">Select security requirements which needs to be taken into account during the development phase of your project.</p>
+            </div>
+        </div>
+        <div class=" align-center">
+            <table class="table">
+                <tr>
+                    <th>
+                        @*<input type="checkbox" id="ckbCheckAll" style="left: 27%; position: relative; display:none"/>*@
+                        <input type="checkbox" id="sa_foo" name="sa_foo" data-checkbox-name="DevelopmentChecks" class="selectall" style="left: 27%; position: relative;" />
+                    </th>
+                    <th>
+                        <span class="checkmark"></span>
+                        Select All
+                    </th>
+                </tr>
+                @foreach (var item in ViewBag.Checklist)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="checkboxClass" id="Check_@item.Development_ID" name="DevelopmentChecks" checked="@item.Development_IsChecked" data-select-all="sa_foo">
+                        </td>
+                        <td style="text-align:left">
+                            <span class="checkmark"></span>
+                            @item.Development_Value
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+            <br />
+            <a class="button" href="@Url.Action("Phases","Phases")">&#8592 Back</a>
+            <button type="submit" class="button green-button" onclick="SaveList()">Add to Checklist</button>
+            <br>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var SaveList = function () {
+        debugger;
+        var arrItem = [];
+        var commaSeparedIDs = "";
+
+        $("input[name='DevelopmentChecks']:checked").each(function (index, val) {
+            var checkID = $(val).attr("Id");
+            var arr = checkID.split('_');
+            var currentCheckboxId = arr[1];
+            var IsChecked = $("#" + checkID).is(":checked", true);
+
+            if (IsChecked) {
+                arrItem.push(currentCheckboxId);
+            }
+        })
+
+
+        commaSeparedIDs = arrItem.toString();
+        var postData = {
+            ItemList: commaSeparedIDs
+        };
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            type: "POST",
+            url: "/Phases/Development",
+            data: JSON.stringify(postData),
+            success: function (response) {
+                debugger;
+                if (response.IsSuccess) {
+                    alert(response.Message);
+                    window.location.href = "" + response.Url + "";
+                } else {
+                    alert(response.Message);
+                }
+            },
+            failure: function (response) {
+                debugger;
+                alert(response.Message);
+            },
+            error: function (response) {
+                debugger;
+                alert(response.Message);
+            }
+        });
+
+    }
+
+    //    $(document).ready(function () {
+    //    $("#ckbCheckAll").click(function () {
+    //        $(".checkboxClass").prop('checked', $(this).prop('checked'));
+    //    });
+    //});
+
+    $(document).ready(function () {
+
+        $(':checkbox.selectall').on('click', function () {
+            $(':checkbox[name=' + $(this).data('checkbox-name') + ']').prop("checked", $(this).prop("checked"));
+        });
+        // Individual checkboxes
+        $(':checkbox.checkboxClass').on('click', function () { // 1
+
+            var _this = $(this); // 2
+            var _selectall = _this.prop("checked"); //3
+
+            if (_selectall) { // 4
+                // 5
+                $(':checkbox[name=' + _this.attr('name') + ']').each(function (i) {
+                    // 6
+                    _selectall = $(this).prop("checked");
+                    return _selectall; // 7
+                });
+
+            }
+
+            // 8
+            $(':checkbox[name=' + $(this).data('select-all') + ']').prop("checked", _selectall);
+        });
+
+    });
+</script>

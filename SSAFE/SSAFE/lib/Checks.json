@@ -1,0 +1,16 @@
+{
+  "checks": [
+    {
+      "User_ID": "d23c53d7-326b-42e4-a1b4-74f6f9a888ba",
+      "Checklist_ID": "d470025a-9945-4605-9bd3-ede87d0db0d1",
+      "Checklist_Name": "test1",
+      "Checks_list": [ 1, 2, 3, 4 ]
+    },
+    {
+      "User_ID": "d23c53d7-326b-42e4-a1b4-74f6f9a888ba",
+      "Checklist_ID": "28fdfeab-0088-4375-a3c3-ba08df862858",
+      "Checklist_Name": "test2",
+      "Checks_list": [ 5, 6, 7, 8 ]
+    }
+  ]
+}

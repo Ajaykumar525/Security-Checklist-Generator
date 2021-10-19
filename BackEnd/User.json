@@ -1,0 +1,24 @@
+{
+    "users": [
+        {
+            "User_ID": "d23c53d7-326b-42e4-a1b4-74f6f9a888ba",
+            "User_Name": "ajay",
+            "User_Password": "ajay"
+        },
+        {
+            "User_ID": "a7e511c0-0815-47ad-a052-fe88dc53146c",
+            "User_Name": "test",
+            "User_Password": "test"
+        },
+        {
+            "User_ID": "cbdccb49-78a6-49a2-b4dc-98ceb6fedb6a",
+            "User_Name": "komal",
+            "User_Password": "komal"
+        },
+        {
+            "User_ID": "a88aa274-ecf3-43f9-9e60-99561de4d2f5",
+            "User_Name": "Charles",
+            "User_Password": "123"
+        }
+    ]
+}

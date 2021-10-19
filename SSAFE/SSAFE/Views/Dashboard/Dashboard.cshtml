@@ -1,0 +1,67 @@
+﻿@using SSAFE.Infrastructure
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Service Section -->
+<div class="container-our-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @*<h2 class="title-un">Welcome, @Session["UserName"].ToString()</h2>*@
+                @{
+                    DateTime current_time = DateTime.Parse(DateTime.Now.ToShortTimeString());
+                    DateTime Noon = DateTime.Parse("2012/12/12 12:00:00.000");
+                    DateTime Evening = DateTime.Parse("2012/12/12 18:00:00.000");
+                    if (current_time.TimeOfDay > Noon.TimeOfDay)
+                    {
+                        if (current_time.TimeOfDay > Evening.TimeOfDay)
+                        {
+                            <h2 class="title-un">Good Evening, @SessionHelper.UserName</h2>
+                        }
+                        else
+                        {
+                            <h2 class="title-un">Good Afternoon, @SessionHelper.UserName</h2>
+                        }
+                    }
+                    else
+                    {
+                        <h2 class="title-un">Good Morning, @SessionHelper.UserName</h2>
+                    }
+                }
+                <div class="title-un-icon"><i class="fa ion-ios-gear-outline"></i></div>
+                <p class="title-un-des">You can create a checklist for new projects as well as can manage the checklists for existing projects from here.</p>
+            </div>
+        </div>
+        <div class="row services-box-margin">
+            <ul id="myTab" class="nav services-tabs ">
+                <li class="active">
+                    <a href="#" data-toggle="tab">
+                        <div class="service-box-sb wow fadeInUp">
+                            <div class="service-icon">
+                                <i class="fa ion-ios-paperplane-outline"></i>
+                            </div>
+                            <div class="service-info">
+                                <h5>@Html.ActionLink("Create New Project and Checklist", "ProjectInfo", "ProjectInfo")</h5>                                
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="tab">
+                        <div class="service-box-sb wow fadeInUp" data-wow-delay=".4s">
+                            <div class="service-icon">
+                                <i class="fa ion-ios-shuffle"></i>
+                            </div>
+                            <div class="service-info">
+                                <h5>@Html.ActionLink("Manage Existing Project and Checklists", "ProjectList", "ProjectInfo")</h5>
+                            </div>
+                        </div>
+                    </a>
+                </li>                
+            </ul>
+        </div> 
+    </div>
+</div>
+<!-- End Service item -->

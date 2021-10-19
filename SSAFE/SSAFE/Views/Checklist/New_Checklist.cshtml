@@ -1,0 +1,241 @@
+﻿@model SSAFE.Models.ViewModel.ChecklistViewModel
+@{
+    ViewBag.Title = "New Checklist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-our-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title-un">Final Checklist</h2>
+                <div class="title-un-icon"><i class="fa ion-ios-paperplane-outline"></i></div>
+                <p class="title-un-des">All the security requirements selected by you in the phases of SDLC lifecycle are as below. You can check once before finalizing. If you need to modify any requirements, click modify button at the end of this checklist. Once all requirements are finalized, you can simply click print button in order to print the checklist and click save button to save it permanently.</p>
+            </div>
+        </div>
+        <div class=" align-center">
+            <form action="" method="post">
+
+                <p class="title-un" style="font-size:medium">(1) Planning</p>
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int PlanningTrueCount = 0; }
+                    @foreach (var item in Model.Planningvm)
+                    {
+                        if (item.Planning_IsChecked)
+                        {
+                            PlanningTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="PlanningCheck_@item.Planning_ID" name="planningChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Planning_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (PlanningTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <hr style="width:40%" />
+                <p class="title-un" style="font-size:medium">(2) Analysis</p>
+
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int AnalysisTrueCount = 0; }
+                    @foreach (var item in Model.Analysisvm)
+                    {
+                        if (item.Analysis_IsChecked)
+                        {
+                            AnalysisTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="AnalysisCheck_@item.Analysis_ID" name="AnalysisChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Analysis_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (AnalysisTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <hr style="width:40%" />
+                <p class="title-un" style="font-size:medium">(3) Design</p>
+
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int DesignTrueCount = 0; }
+                    @foreach (var item in Model.Designvm)
+                    {
+                        if (item.Design_IsChecked)
+                        {
+                            DesignTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="DesignCheck_@item.Design_ID" name="DesignChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Design_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (DesignTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <hr style="width:40%" />
+                <p class="title-un" style="font-size:medium">(4) Development</p>
+
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int DevelopmentTrueCount = 0; }
+                    @foreach (var item in Model.Developmentvm)
+                    {
+                        if (item.Development_IsChecked)
+                        {
+                            DevelopmentTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="DevelopmentCheck_@item.Development_ID" name="DevelopmentChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Development_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (DevelopmentTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <hr style="width:40%" />
+                <p class="title-un" style="font-size:medium">(5) Testing & Integration</p>
+
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int TestingTrueCount = 0; }
+                    @foreach (var item in Model.Testing_Integrationvm)
+                    {
+                        if (item.Testing_Integration_IsChecked)
+                        {
+                            TestingTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="Testing_IntergrationCheck_@item.Testing_Integration_ID" name="Testing_IntegrationChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Testing_Integration_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (TestingTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <hr style="width:40%" />
+                <p class="title-un" style="font-size:medium">(6) Deployment</p>
+
+                <table class="table" style="width: 90%;margin-left: 7%;">
+                    @{int DeployementTrueCount = 0; }
+                    @foreach (var item in Model.Deploymentvm)
+                    {
+                        if (item.Deployment_IsChecked)
+                        {
+                            DeployementTrueCount++;
+                            <tr>
+                                <td style="padding-left:21%">
+                                    <input type="checkbox" class="checkboxClass" id="DeploymentCheck_@item.Deployment_ID" name="DeploymentChecks">
+                                </td>
+                                <td style="text-align:left;padding-left:21%">
+                                    <span class="checkmark"></span>
+                                    @item.Deployment_Value
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                @if (DeployementTrueCount == 0)
+                {
+                    <label class="container">
+                        <span class="checkmark"></span>
+                        No Checks Selected
+                    </label>
+                }
+
+                <br />
+                <br />
+
+                <div class="title-un-icon"><i class="fa ion-ios-paperplane-outline"></i></div>
+                <br />
+                <br />
+                <a class="button" href="@Url.Action("Phases","Phases")">&#8592 Modify</a>
+                <a class="button" href="#" onclick="window.print()">Print</a>
+                <a class="button green-button" id="save" @*href="@Url.Action("SaveProject_Checklist", "Checklist")"*@>Save</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+    $(function () {
+        $("#save").click(function () {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                type: "POST",
+                url: '@Url.Action("SaveProject_Checklist", "Checklist")',
+                success: function (response) {
+                    if (response.IsSuccess) {
+                        //var ProposedURL = response.Data;
+                        alert(response.Message);
+                        window.location.href = "" + response.Url + "";
+                    } else {
+                        alert(response.Message);
+                    }
+                },
+                failure: function (response) {
+                    debugger;
+                    alert(response.Message);
+                },
+                error: function (response) {
+                    debugger;
+                    alert(response.Message);
+                }
+            });
+        });
+    });
+
+</script>

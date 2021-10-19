@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SSAFE.Models.ViewModel.Projects>
+
+@{
+    ViewBag.Title = "ProjectList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .logged-in {
+        color: green;
+    }
+
+    .logged-out {
+        color: red;
+    }
+
+    td, th {
+        text-align: center;
+    }
+</style>
+<div class="container-our-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title-un">Project List</h2>
+                <div class="title-un-icon"><i class="fa ion-ios-paperplane-outline"></i></div>
+                <p class="title-un-des">Your saved checklists will appear here. You can always comeback and modify them by clicking edit button next to the name of a particular project. You can also delete them by clicking delete button. The "IsActive"" column for deleted checklists will turn red.</p>
+            </div>
+        </div>
+        <div class=" align-center">
+            <table class="table">
+                <tr>
+                    <th>
+                        Project Name
+                    </th>
+                    <th>
+                        Project Description
+                    </th>
+                    <th>
+                        Project IsActive
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project_Description)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Project_IsActive)*@
+                            @if (item.Project_IsActive)
+                            {
+                                <span class="logged-in">●</span>
+                            }
+                            else
+                            {
+                                <span class="logged-out">●</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Project_IsActive)
+                            {
+                                <a href="/ProjectInfo/ProjectInfo/@item.Project_ID.ToString()">Edit |</a>
+                                <a href="/ProjectInfo/DeleteProject/@item.Project_ID.ToString()" onclick="return confirm('Are you sure?');"> Delete </a>
+                            }
+                            @*Html.ActionLink("Delete", "Your-Action", new { id = item.Project_ID }, new { onclick = "return confirm('Are you sure?');" })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <br /><br />
+            @*<button class="button green-button" id="submit">Next</button><br>*@
+            @*<p class="button">
+                    @Html.ActionLink("Next", "Phases", "Phases")
+                </p>*@
+        </div>
+    </div>
+</div>
